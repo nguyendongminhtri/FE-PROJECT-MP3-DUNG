@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="list-music" id="top10-content">
+    <div class="content">
+      <a routerLink="">
+<!--        <mat-icon>arrow_back</mat-icon>-->
+      </a>
+      <h1 style="font-weight: 600">Songs</h1>
+    </div>
+
+    <div class="row top-trending">
+
+      <div class="col col-lg-4 songs" *ngFor="let song of listSong">
+        <div class="top-song">
+          <div class="top-song-img">
+            <a [routerLink]="['/detail-song/',song.id]"><img
+              src="{{song.avatar}}"
+              alt=""></a>
+          </div>
+          <div class="top-song-info">
+            <a href=""><h4>{{song.name}}</h4></a>
+            <div *ngFor="let singer of song.singerList">
+              <a [routerLink]="['/detail-singer/',singer.id]"><span>{{singer.name}}</span></a>
+            </div>
+          </div>
+        </div>
+        <!--        <div class="icon" style="width: 30px;float: right; margin-top: -55px;margin-right: 35px">-->
+        <!--          <mat-icon style="float: right;margin-bottom: 30px">pending</mat-icon>-->
+        <!--        </div>-->
+      </div>
+
+
+    </div>
+  </div>
+
+  <mat-paginator [length]="totalElements"
+                 (page)="nextPage($event)"
+                 [pageSizeOptions]="[6, 12, 24, 120]"
+                 aria-label="Select page">
+  </mat-paginator>
+</div>
