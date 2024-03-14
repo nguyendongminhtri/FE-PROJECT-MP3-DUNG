@@ -1,16 +1,12 @@
-
 import {Song} from "./Song";
 
-export class Playlist {
+export class Album {
   public id?:number;
   public name?: string;
   public avatar?: string;
-  public songList: Song[] = [];
 
-
-  constructor(name: string, avatar: string, songList: Song[]) {
+  constructor(name: string, avatar: string) {
     this.name = name;
     this.avatar = avatar;
-    this.songList = songList;
   }
 }

@@ -33,7 +33,7 @@ export class CreateCategoryComponent {
       this.status = "Avatar field cannot be empty!"
     }else {
       this.categoryService.createCategoryService(this.category).subscribe(data =>{
-        if (data.message=='category_exist'){
+        if (data.message=='name_exist'){
           this.status = 'The name is exist'
         }else {
           this.status = 'Create success';

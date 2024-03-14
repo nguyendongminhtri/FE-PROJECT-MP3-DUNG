@@ -1,7 +1,9 @@
-<a routerLink="/playlist" class="container">
+<a routerLink="/album" class="container">
   <mat-icon>arrow_back</mat-icon>
 </a>
-
+<mat-card>
+  <h1 style="text-align: center">{{nameAlbum}}</h1>
+</mat-card>
 <div class="blog-slider">
 
   <div class="blog-slider__wrp swiper-wrapper">
@@ -19,9 +21,7 @@
       <div>
         <div class="blog-slider__content">
           <div class="blog-slider__title" id="title"></div>
-          <div class="row" *ngFor="let  sg of singer">
-            <marquee ><span>{{sg.name}}</span></marquee>
-          </div>
+          <div  *ngFor="let  sg of singer" ><span>{{sg.name}}</span></div>
         </div>
         <p class="blog-slider__text"></p>
 
@@ -59,22 +59,22 @@
 
 
     </div>
-<!--    &lt;!&ndash;- right part -&ndash;&gt;-->
-<!--    <div class="right">-->
-<!--&lt;!&ndash;      <div class="show_song_no">&ndash;&gt;-->
-<!--&lt;!&ndash;        <p id="present">1</p>&ndash;&gt;-->
-<!--&lt;!&ndash;        <p>/</p>&ndash;&gt;-->
-<!--&lt;!&ndash;        <p id="total"></p>&ndash;&gt;-->
-<!--&lt;!&ndash;      </div>&ndash;&gt;-->
-<!--      &lt;!&ndash;- song title & artist name -&ndash;&gt;-->
-<!--&lt;!&ndash;      <p id="title" style="font-size: 2.0vw"></p>&ndash;&gt;-->
-<!--&lt;!&ndash;      <div *ngFor="let  sg of singer">&ndash;&gt;-->
-<!--&lt;!&ndash;        <p>{{sg.name}}</p>&ndash;&gt;-->
-<!--&lt;!&ndash;      </div>&ndash;&gt;-->
-<!--      &lt;!&ndash;- middle part -&ndash;&gt;-->
+    <!--    &lt;!&ndash;- right part -&ndash;&gt;-->
+    <!--    <div class="right">-->
+    <!--&lt;!&ndash;      <div class="show_song_no">&ndash;&gt;-->
+    <!--&lt;!&ndash;        <p id="present">1</p>&ndash;&gt;-->
+    <!--&lt;!&ndash;        <p>/</p>&ndash;&gt;-->
+    <!--&lt;!&ndash;        <p id="total"></p>&ndash;&gt;-->
+    <!--&lt;!&ndash;      </div>&ndash;&gt;-->
+    <!--      &lt;!&ndash;- song title & artist name -&ndash;&gt;-->
+    <!--&lt;!&ndash;      <p id="title" style="font-size: 2.0vw"></p>&ndash;&gt;-->
+    <!--&lt;!&ndash;      <div *ngFor="let  sg of singer">&ndash;&gt;-->
+    <!--&lt;!&ndash;        <p>{{sg.name}}</p>&ndash;&gt;-->
+    <!--&lt;!&ndash;      </div>&ndash;&gt;-->
+    <!--      &lt;!&ndash;- middle part -&ndash;&gt;-->
 
-    </div>
   </div>
+</div>
 <!--</div>-->
 
 

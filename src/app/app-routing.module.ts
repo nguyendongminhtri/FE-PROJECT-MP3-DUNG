@@ -19,7 +19,11 @@ import {ListSongComponent} from "./content/song/list-song/list-song.component";
 import {PageSearchComponent} from "./content/page-search/page-search.component";
 import {TopTrendingComponent} from "./content/song/top-trending/top-trending.component";
 import {CheckLoginGuard} from "./service/CheckLoginGuard";
-import {CheckLogout} from "./service/CheckLogout";
+import {PageAlbumComponent} from "./content/album/page-album/page-album.component";
+import {CreateAlbumComponent} from "./content/album/create-album/create-album.component";
+import {UpdateAlbumComponent} from "./content/album/update-album/update-album.component";
+import {DetailAlbumComponent} from "./content/album/detail-album/detail-album.component";
+
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -45,7 +49,10 @@ const routes: Routes = [
 
   {path:'search', component: PageSearchComponent},
 
-  {path:'topTrending',component:TopTrendingComponent}
+  {path:'topTrending',component:TopTrendingComponent},
+  {path: 'album', component: PageAlbumComponent},
+  {path: 'create-album', component: CreateAlbumComponent},
+  {path: 'detail-album/:id', component: DetailAlbumComponent},
 ];
 
 @NgModule({

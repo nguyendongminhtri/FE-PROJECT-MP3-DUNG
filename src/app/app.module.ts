@@ -62,6 +62,11 @@ import { PageSearchComponent } from './content/page-search/page-search.component
 import { TopTrendingComponent } from './content/song/top-trending/top-trending.component';
 import {CheckLoginGuard} from "./service/CheckLoginGuard";
 import { PageAlbumComponent } from './content/album/page-album/page-album.component';
+import { CreateAlbumComponent } from './content/album/create-album/create-album.component';
+import { DetailAlbumComponent } from './content/album/detail-album/detail-album.component';
+import { UpdateAlbumComponent } from './content/album/update-album/update-album.component';
+import { DeleteAlbumComponent } from './content/album/delete-album/delete-album.component';
+import { DialogSuccessComponent } from './dialog/dialog-success/dialog-success.component';
 
 
 
@@ -100,6 +105,11 @@ import { PageAlbumComponent } from './content/album/page-album/page-album.compon
     PageSearchComponent,
     TopTrendingComponent,
     PageAlbumComponent,
+    CreateAlbumComponent,
+    DetailAlbumComponent,
+    UpdateAlbumComponent,
+    DeleteAlbumComponent,
+    DialogSuccessComponent,
 
   ],
     imports: [

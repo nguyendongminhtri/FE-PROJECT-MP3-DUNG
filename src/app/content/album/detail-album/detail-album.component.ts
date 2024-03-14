@@ -1,33 +1,36 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
+import {Playlist} from "../../../model/Playlist";
+import {PlaylistDTO} from "../../../model/PlaylistDTO";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatDialog} from "@angular/material/dialog";
 import {ActivatedRoute} from "@angular/router";
 import {PlaylistService} from "../../../service/playlist.service";
-import {Playlist} from "../../../model/Playlist";
-import {MatDialog} from "@angular/material/dialog";
-import {ListSongComponent} from "../../song/list-song/list-song.component";
+import {Singer} from "../../../model/Singer";
 import {Song} from "../../../model/Song";
 import {MatTableDataSource} from "@angular/material/table";
-import {MatPaginator} from "@angular/material/paginator";
+import {ListSongComponent} from "../../song/list-song/list-song.component";
 import {DeleteCategoryComponent} from "../../category/delete-category/delete-category.component";
-import {PlaylistDTO} from "../../../model/PlaylistDTO";
-import {Singer} from "../../../model/Singer";
+import {Album} from "../../../model/Album";
+import {AlbumDTO} from "../../../model/AlbumDTO";
+import {AlbumService} from "../../../service/album.service";
 
 @Component({
-  selector: 'app-detail-playlist',
-  templateUrl: './detail-playlist.component.html',
-  styleUrls: ['./detail-playlist.component.css']
+  selector: 'app-detail-album',
+  templateUrl: './detail-album.component.html',
+  styleUrls: ['./detail-album.component.css']
 })
-export class DetailPlaylistComponent implements OnInit {
-  playlist?: Playlist;
+export class DetailAlbumComponent {
+  album?: Album;
   displayedColumns: string[] = ['id', 'name', 'avatar', 'delete'];
   dataSource: any;
 
-  playlistDTO?: PlaylistDTO;
+  albumDTO?: AlbumDTO;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
 
 
   constructor(private dialog: MatDialog,
               private act: ActivatedRoute,
-              private playlistService: PlaylistService) {
+              private albumService: AlbumService) {
   }
 
   panelOpenState = false;
@@ -83,20 +86,21 @@ export class DetailPlaylistComponent implements OnInit {
   // ];
 
 
-  idPlaylist: number = 0;
-
+  idAlbum: number = 0;
+  nameAlbum = ''
   ngOnInit(): void {
-    this.act.paramMap.subscribe(playlistId => {
+    this.act.paramMap.subscribe(albumId => {
       // @ts-ignore
-      this.idPlaylist = +playlistId.get('id');
+      this.idAlbum = +albumId.get('id');
 
-      this.playlistService.findPlaylistById(this.idPlaylist).subscribe(data => {
-        this.playlist = data;
+      this.albumService.findAlbumById(this.idAlbum).subscribe(data => {
+        this.album = data;
+        this.nameAlbum = data.name;
         console.log(data)
-        console.log("this.playlist    ---->", this.playlist);
+        console.log("this.playlist    ---->", this.album);
       })
     })
-    this.playlistService.getListSongFromPlaylist(this.idPlaylist).subscribe(data => {
+    this.albumService.getListSongFromAlbum(this.idAlbum).subscribe(data => {
       this.listSong = data;
       console.log(this.listSong, "list Song trong onInit")
 
@@ -314,13 +318,13 @@ export class DetailPlaylistComponent implements OnInit {
   openDialogCreate() {
     const dialogRef = this.dialog.open(ListSongComponent, {
       data: {
-        dataKey: {type: 'pll', id: this.idPlaylist}
+        dataKey: {type: 'alb', id: this.idAlbum}
       }
     });
     dialogRef.afterClosed().subscribe(result => {
 
       if (result || result == undefined) {
-        this.playlistService.getListSongFromPlaylist(this.idPlaylist).subscribe(data => {
+        this.albumService.getListSongFromAlbum(this.idAlbum).subscribe(data => {
           this.listSong = data;
           console.log(this.listSong, "list Song trong onInit")
           this.dataSource = new MatTableDataSource<Song>(this.listSong);
@@ -339,11 +343,11 @@ export class DetailPlaylistComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result, "result tren")
       if (result) {
-        this.playlistDTO = new PlaylistDTO(this.idPlaylist, id);
-        this.playlistService.deleteSongInPlaylist(this.playlistDTO).subscribe(() => {
+        this.albumDTO = new AlbumDTO(this.idAlbum, id);
+        this.albumService.deleteSongInAlbum(this.albumDTO).subscribe(() => {
           console.log("sau khi xóa")
           /// gọi lại api phía backend  ----> cập nhật dữ liệu
-          this.playlistService.getListSongFromPlaylist(this.idPlaylist).subscribe(data => {
+          this.albumService.getListSongFromAlbum(this.idAlbum).subscribe(data => {
             this.listSong = data;
             console.log(this.listSong, "list Song trong onInit")
             this.dataSource = new MatTableDataSource<Song>(this.listSong);

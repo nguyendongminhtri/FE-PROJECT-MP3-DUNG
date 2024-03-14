@@ -8,6 +8,10 @@ import {MatTableDataSource} from "@angular/material/table";
 import {SongService} from "../../../service/song.service";
 import {Song} from "../../../model/Song";
 import {PlaylistDTO} from "../../../model/PlaylistDTO";
+import {AlbumDTO} from "../../../model/AlbumDTO";
+import {AlbumService} from "../../../service/album.service";
+import {CreateSongComponent} from "../create-song/create-song.component";
+import {DialogSuccessComponent} from "../../../dialog/dialog-success/dialog-success.component";
 
 @Component({
   selector: 'app-list-song',
@@ -17,13 +21,15 @@ import {PlaylistDTO} from "../../../model/PlaylistDTO";
 export class ListSongComponent {
    checkUserAdmin = false;
    playlistDTO ?: PlaylistDTO;
+   albumDTO?: AlbumDTO;
 
   constructor(private dialog: MatDialog,
               private tokenService: TokenService,
               private songService: SongService,
               @Inject(MAT_DIALOG_DATA)
               public data:any,
-              private playService: PlaylistService){}
+              private playService: PlaylistService,
+              private albumService: AlbumService){}
 
 
   listSong: Song[] = [];
@@ -45,19 +51,38 @@ export class ListSongComponent {
       this.dataSource.paginator = this.paginator;
     })
   }
-
+openDialogSuccess(){
+  const dialogRef = this.dialog.open(DialogSuccessComponent);
+}
   addSong(id : any) {
     console.log(id , "id song");
-    this.playlistDTO = new PlaylistDTO(
-      this.data.dataKey,
-      id
-    )
-    console.log(this.playlistDTO , "playlistDTO")
-    this.playService.addSong(this.playlistDTO).subscribe(data=>{
-      if (data.message == "create_success"){
-        console.log("create thanh cong")
-      }
-    })
+    console.log('dataKey --->', this.data.dataKey)
+    if(this.data.dataKey.type=='pll'){
+      this.playlistDTO = new PlaylistDTO(
+        this.data.dataKey.id,
+        id
+      )
+      console.log(this.playlistDTO , "playlistDTO")
+      this.playService.addSong(this.playlistDTO).subscribe(data=>{
+        if (data.message == "create_success"){
+          console.log("create PLL thanh cong")
+          this.openDialogSuccess();
+        }
+      })
+    } else if(this.data.dataKey.type=='alb'){
+      this.albumDTO = new AlbumDTO(
+        this.data.dataKey.id,
+        id
+      )
+      console.log(this.playlistDTO , "playlistDTO")
+      this.albumService.addSong(this.albumDTO).subscribe(data=>{
+        if (data.message == "create_success"){
+          console.log("create ALB thanh cong")
+          this.openDialogSuccess();
+        }
+      })
+    }
+
 
   }
 }
