@@ -9,10 +9,10 @@
     <button mat-button (click)="openDialogCreate()" *ngIf="checkUserAdmin" type="submit">Thêm ca sĩ<mat-icon>add_circle</mat-icon></button>
   </div>
   <div class="gallery">
-    <div *ngFor="let singer of singerList" class="gallery-item col-lg-6" tabindex="0">
+    <div *ngFor="let singer of singerList"  tabindex="0" style="text-align: center">
       <a [routerLink]="['/detail-singer/',singer.id]">
         <img src="{{singer.avatar}}"
-             class="gallery-image" alt="" height="205.6px">
+             alt="" >
       </a>
       <div class="info" style="display: flex">
 
