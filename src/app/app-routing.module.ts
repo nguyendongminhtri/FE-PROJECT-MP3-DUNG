@@ -23,6 +23,7 @@ import {PageAlbumComponent} from "./content/album/page-album/page-album.componen
 import {CreateAlbumComponent} from "./content/album/create-album/create-album.component";
 import {UpdateAlbumComponent} from "./content/album/update-album/update-album.component";
 import {DetailAlbumComponent} from "./content/album/detail-album/detail-album.component";
+import {DetailCategoryComponent} from "./content/category/detail-category/detail-category.component";
 
 
 const routes: Routes = [
@@ -33,6 +34,7 @@ const routes: Routes = [
 
   {path:'category',component:PageCategoryComponent},
   {path:'create-category',component:CreateCategoryComponent},
+  {path:'detail-category/:id',component:DetailCategoryComponent},
 
   {path:'singer',component:PageSingerComponent},
   {path:'create-singer',component:CreateSingerComponent},

@@ -67,6 +67,7 @@ import { DetailAlbumComponent } from './content/album/detail-album/detail-album.
 import { UpdateAlbumComponent } from './content/album/update-album/update-album.component';
 import { DeleteAlbumComponent } from './content/album/delete-album/delete-album.component';
 import { DialogSuccessComponent } from './dialog/dialog-success/dialog-success.component';
+import { DetailCategoryComponent } from './content/category/detail-category/detail-category.component';
 
 
 
@@ -110,6 +111,7 @@ import { DialogSuccessComponent } from './dialog/dialog-success/dialog-success.c
     UpdateAlbumComponent,
     DeleteAlbumComponent,
     DialogSuccessComponent,
+    DetailCategoryComponent,
 
   ],
     imports: [
