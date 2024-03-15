@@ -146,6 +146,7 @@ export class DetailAlbumComponent implements OnDestroy {
   }
 
   load_track(index_no: any) {
+    this.singer = [];
 
     console.log('index_no ---->', index_no)
     console.log(this.listSong[index_no], " song trong load track")
@@ -252,12 +253,14 @@ export class DetailAlbumComponent implements OnDestroy {
   ngOnDestroy() {
     this.track.pause();
   }
-volumeAfterMute = 0;
-  muteSound(){
+
+  volumeAfterMute = 0;
+
+  muteSound() {
     this.mute = !this.mute;
     // console.log('bam 1 phat --->', this.volumeAfterMute)
     if (this.mute) {
-      this.volumeAfterMute = this.recent_volume.value/100;
+      this.volumeAfterMute = this.recent_volume.value / 100;
       this.track.volume = 0;
       this.recent_volume.value = 0;
       this.volume_show.innerHTML = 0;
@@ -266,7 +269,7 @@ volumeAfterMute = 0;
     } else {
       this.track.volume = this.volumeAfterMute;
       console.log('this.voluem --->', this.track.volume)
-      this.recent_volume.value = this.volumeAfterMute*100;
+      this.recent_volume.value = this.volumeAfterMute * 100;
       this.volume_show.value = this.recent_volume.value;
       this.volume_show.innerHTML = this.recent_volume.value;
 
@@ -295,6 +298,7 @@ volumeAfterMute = 0;
       this.play.innerHTML = '<i class="fa fa-play" aria-hidden="true"></i>';
       console.log('this.autoplay ===', this.autoplay)
       if (!this.autoplay) {
+        this.singer = [];
         // console.log('vao if khong ?????')
         if (this.index_no < this.listSong.length - 1) {
           this.index_no += 1;
@@ -305,6 +309,7 @@ volumeAfterMute = 0;
         this.load_track(this.index_no);
         this.playSong();
       } else {
+        this.singer = [];
         this.playSong()
       }
     }
