@@ -1,10 +1,7 @@
-import {Component, ViewChild} from '@angular/core';
-import {Playlist} from "../../../model/Playlist";
-import {PlaylistDTO} from "../../../model/PlaylistDTO";
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from "@angular/material/paginator";
 import {MatDialog} from "@angular/material/dialog";
 import {ActivatedRoute} from "@angular/router";
-import {PlaylistService} from "../../../service/playlist.service";
 import {Singer} from "../../../model/Singer";
 import {Song} from "../../../model/Song";
 import {MatTableDataSource} from "@angular/material/table";
@@ -13,24 +10,26 @@ import {DeleteCategoryComponent} from "../../category/delete-category/delete-cat
 import {Album} from "../../../model/Album";
 import {AlbumDTO} from "../../../model/AlbumDTO";
 import {AlbumService} from "../../../service/album.service";
+import {TokenService} from "../../../service/token.service";
 
 @Component({
   selector: 'app-detail-album',
   templateUrl: './detail-album.component.html',
   styleUrls: ['./detail-album.component.css']
 })
-export class DetailAlbumComponent {
+export class DetailAlbumComponent  {
   album?: Album;
   displayedColumns: string[] = ['id', 'name', 'avatar', 'delete'];
   dataSource: any;
-
+  checkUserAdmin = false;
   albumDTO?: AlbumDTO;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
 
 
   constructor(private dialog: MatDialog,
               private act: ActivatedRoute,
-              private albumService: AlbumService) {
+              private albumService: AlbumService,
+              private tokenService: TokenService) {
   }
 
   panelOpenState = false;
@@ -90,6 +89,12 @@ export class DetailAlbumComponent {
   nameAlbum = ''
   ngOnInit(): void {
     this.act.paramMap.subscribe(albumId => {
+      if (this.tokenService.getToken()) {
+        console.log('role ---->', this.tokenService.getRole())
+        if (JSON.stringify(this.tokenService.getRole()) == JSON.stringify(['ADMIN'])) {
+          this.checkUserAdmin = true;
+        }
+      }
       // @ts-ignore
       this.idAlbum = +albumId.get('id');
 

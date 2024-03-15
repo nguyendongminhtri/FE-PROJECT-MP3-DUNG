@@ -80,7 +80,7 @@
 
 
 
-<div class="container">
+<div class="container" *ngIf="checkUserAdmin">
   <mat-expansion-panel (opened)="panelOpenState = true"
                        (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
@@ -137,7 +137,7 @@
 
 </div>
 
-<div style="margin-bottom: 20px">
+<div style="margin-bottom: 20px" *ngIf="checkUserAdmin">
   <button mat-button (click)="openDialogCreate()" type="submit">Add song
     <mat-icon>add_circle</mat-icon>
   </button>
