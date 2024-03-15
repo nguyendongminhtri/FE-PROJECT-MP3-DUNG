@@ -22,11 +22,14 @@
           <div class="btn-song">
 
           </div>
-
-          <div class="music-song">
-            <audio controls [src]="song?.url" (timeupdate)="onTimeUpdate($event)">
-            </audio>
+          <div class="example-box" cdkDrag>
+<!--            Drag me around-->
+<!--            <div class="music-song">-->
+              <audio controls [src]="song?.url" (timeupdate)="onTimeUpdate($event)"></audio>
+<!--            </div>-->
           </div>
+
+
 
         </div>
       </div>
@@ -34,4 +37,5 @@
     </div>
   </div>
 </div>
+
 

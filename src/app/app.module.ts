@@ -68,6 +68,7 @@ import { UpdateAlbumComponent } from './content/album/update-album/update-album.
 import { DeleteAlbumComponent } from './content/album/delete-album/delete-album.component';
 import { DialogSuccessComponent } from './dialog/dialog-success/dialog-success.component';
 import { DetailCategoryComponent } from './content/category/detail-category/detail-category.component';
+import {CdkDrag} from "@angular/cdk/drag-drop";
 
 
 
@@ -138,7 +139,8 @@ import { DetailCategoryComponent } from './content/category/detail-category/deta
         MatRadioModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        MatExpansionModule
+        MatExpansionModule,
+        CdkDrag
     ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
