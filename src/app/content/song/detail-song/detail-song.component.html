@@ -15,8 +15,8 @@
         <div *ngFor="let singer of song?.singerList">
           <span class="blog-slider__code"  [routerLink]="['/detail-singer/',singer.id]">{{singer.name}}</span>
         </div>
-                <p class="blog-slider__text">{{song?.lyrics}}</p>
-
+<!--                <p class="blog-slider__text"></p>-->
+        <marquee style="color: #ef068b; font-size: 20px">{{song?.lyrics}}</marquee>
         <div class="play_song">
 
           <div class="btn-song">
