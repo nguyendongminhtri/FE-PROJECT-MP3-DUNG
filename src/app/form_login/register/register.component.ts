@@ -18,7 +18,7 @@ export class RegisterComponent {
   emailFormValidate = new FormControl('', [
     Validators.required,
     // Validators.pattern('[a-zA-Z0-9._%+-]+@gmail\\.com$')
-    Validators.pattern('[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]{1,}')
+    Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')
   ])
 
   hide = true;
