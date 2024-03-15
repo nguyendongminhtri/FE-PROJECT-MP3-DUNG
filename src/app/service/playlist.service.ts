@@ -9,8 +9,8 @@ import {PlaylistDTO} from "../model/PlaylistDTO";
   providedIn: 'root'
 })
 export class PlaylistService {
-  private API_PLAYLIST = environment.API_LOCAL + 'playlist';
-// private API_PLAYLIST = environment.API_SERVER+'playlist';
+  // private API_PLAYLIST = environment.API_LOCAL + 'playlist';
+private API_PLAYLIST = environment.API_SERVER+'playlist';
   constructor(private httpClient: HttpClient) {
   }
 
