@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from "@angular/material/paginator";
 import {MatDialog} from "@angular/material/dialog";
 import {ActivatedRoute} from "@angular/router";
@@ -17,7 +17,7 @@ import {TokenService} from "../../../service/token.service";
   templateUrl: './detail-album.component.html',
   styleUrls: ['./detail-album.component.css']
 })
-export class DetailAlbumComponent  {
+export class DetailAlbumComponent implements OnDestroy {
   album?: Album;
   displayedColumns: string[] = ['id', 'name', 'avatar', 'delete'];
   dataSource: any;
@@ -87,6 +87,7 @@ export class DetailAlbumComponent  {
 
   idAlbum: number = 0;
   nameAlbum = ''
+
   ngOnInit(): void {
     this.act.paramMap.subscribe(albumId => {
       if (this.tokenService.getToken()) {
@@ -248,22 +249,27 @@ export class DetailAlbumComponent  {
 
   mute = false;
 
-
-  muteSound() {
+  ngOnDestroy() {
+    this.track.pause();
+  }
+volumeAfterMute = 0;
+  muteSound(){
     this.mute = !this.mute;
-    // console.log('ths.mute --->', this.mute)
+    // console.log('bam 1 phat --->', this.volumeAfterMute)
     if (this.mute) {
+      this.volumeAfterMute = this.recent_volume.value/100;
       this.track.volume = 0;
       this.recent_volume.value = 0;
       this.volume_show.innerHTML = 0;
       this.volume_icon.className = 'bi bi-volume-mute-fill'
 
     } else {
-      this.track.volume = 0.2;
+      this.track.volume = this.volumeAfterMute;
       console.log('this.voluem --->', this.track.volume)
-      this.volume_show.value = 20;
-      this.volume_show.innerHTML = 20;
-      this.recent_volume.value = 20;
+      this.recent_volume.value = this.volumeAfterMute*100;
+      this.volume_show.value = this.recent_volume.value;
+      this.volume_show.innerHTML = this.recent_volume.value;
+
       this.volume_icon.className = 'bi bi-megaphone'
     }
 
